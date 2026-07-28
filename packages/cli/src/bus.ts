@@ -1,10 +1,10 @@
-import type {
+﻿import type {
   AgentEvent,
   AgentRunLog,
   ApprovalDecision,
   PendingApproval,
-} from "@agent-inspector/core";
-import { getPendingApproval, MOCK_RUN } from "@agent-inspector/core";
+} from "@kashifmuhammad/agent-inspector-core";
+import { getPendingApproval, MOCK_RUN } from "@kashifmuhammad/agent-inspector-core";
 import { EventEmitter } from "node:events";
 
 /**
@@ -145,3 +145,4 @@ export function getBus(): SessionBus {
   }
   return g[globalKey];
 }
+

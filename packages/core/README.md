@@ -1,4 +1,4 @@
-# @agent-inspector/core
+﻿# @kashifmuhammad/agent-inspector-core
 
 Event schema, LangGraph adapter, and approval helpers shared by the CLI and React package.
 
@@ -8,7 +8,8 @@ import {
   classifyRisk,
   requiresApproval,
   MOCK_RUN,
-} from "@agent-inspector/core";
+} from "@kashifmuhammad/agent-inspector-core";
 
 const log = adaptLangGraphLog({ messages: [...] });
 ```
+

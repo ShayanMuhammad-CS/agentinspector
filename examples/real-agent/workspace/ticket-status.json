@@ -1,9 +1,9 @@
 {
   "tickets": {
     "TICKET-1001": {
-      "status": "resolved",
-      "assignee": "support-desk-agent",
-      "updatedAt": "2026-07-28T07:20:19.443Z"
+      "status": "open",
+      "assignee": null,
+      "updatedAt": null
     }
   }
 }

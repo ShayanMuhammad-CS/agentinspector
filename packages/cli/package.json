@@ -1,7 +1,7 @@
 {
   "name": "agent-inspector",
   "version": "0.1.0",
-  "description": "CLI to inspect LangGraph agent trajectories locally — zero infra, localhost only",
+  "description": "CLI to inspect LangGraph agent trajectories locally - zero infra, localhost only",
   "type": "module",
   "bin": {
     "agent-inspector": "./bin/agent-inspector.js"
@@ -18,15 +18,15 @@
     "package.json"
   ],
   "scripts": {
-    "build": "pnpm --filter @agent-inspector/core build && pnpm --filter @agent-inspector/react build && tsup && next build",
+    "build": "pnpm --filter @kashifmuhammad/agent-inspector-core build && pnpm --filter @kashifmuhammad/agent-inspector-react build && tsup && next build",
     "dev": "tsx src/cli.ts --log ../../examples/mock-run.json --no-open",
     "start": "tsx src/cli.ts",
     "typecheck": "tsc --noEmit",
     "clean": "rimraf dist .next"
   },
   "dependencies": {
-    "@agent-inspector/core": "workspace:*",
-    "@agent-inspector/react": "workspace:*",
+    "@kashifmuhammad/agent-inspector-core": "workspace:*",
+    "@kashifmuhammad/agent-inspector-react": "workspace:*",
     "commander": "^12.1.0",
     "next": "^14.2.21",
     "open": "^10.1.0",
@@ -50,3 +50,4 @@
     "node": ">=18"
   }
 }
+

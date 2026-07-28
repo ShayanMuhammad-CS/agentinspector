@@ -1,10 +1,10 @@
-"use client";
+﻿"use client";
 
 import {
   AgentInspector,
   useInspectorStore,
-} from "@agent-inspector/react";
-import type { AgentEvent, ApprovalDecision } from "@agent-inspector/core";
+} from "@kashifmuhammad/agent-inspector-react";
+import type { AgentEvent, ApprovalDecision } from "@kashifmuhammad/agent-inspector-core";
 import { useCallback, useEffect, useState } from "react";
 
 interface Snapshot {
@@ -110,7 +110,7 @@ export default function HomePage() {
   if (!ready) {
     return (
       <div className="ai-root" style={{ padding: 40, color: "var(--ai-text-muted)" }}>
-        Loading trajectory…
+        Loading trajectory...
       </div>
     );
   }
@@ -123,3 +123,4 @@ export default function HomePage() {
     />
   );
 }
+

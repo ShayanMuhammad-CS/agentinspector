@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import type { PendingApproval } from "@agent-inspector/core";
+import type { PendingApproval } from "@kashifmuhammad/agent-inspector-core";
 import type { OnApprovalHandler } from "../store.js";
 
 interface ApprovalCardProps {
@@ -54,10 +54,11 @@ export function ApprovalCard({
       ) : (
         <p className="ai-idle-note">
           {readOnly
-            ? "Replay mode — decisions were recorded with this run."
-            : "Waiting for an approval handler…"}
+            ? "Replay mode - decisions were recorded with this run."
+            : "Waiting for an approval handler..."}
         </p>
       )}
     </div>
   );
 }
+

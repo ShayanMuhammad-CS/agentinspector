@@ -1,4 +1,4 @@
-lockfileVersion: '9.0'
+﻿lockfileVersion: '9.0'
 
 settings:
   autoInstallPeers: true
@@ -10,10 +10,10 @@ importers:
 
   packages/cli:
     dependencies:
-      '@agent-inspector/core':
+      '@kashifmuhammad/agent-inspector-core':
         specifier: workspace:*
         version: link:../core
-      '@agent-inspector/react':
+      '@kashifmuhammad/agent-inspector-react':
         specifier: workspace:*
         version: link:../react
       commander:
@@ -68,7 +68,7 @@ importers:
 
   packages/react:
     dependencies:
-      '@agent-inspector/core':
+      '@kashifmuhammad/agent-inspector-core':
         specifier: workspace:*
         version: link:../core
       zustand:
@@ -1730,3 +1730,4 @@ snapshots:
     optionalDependencies:
       '@types/react': 18.3.31
       react: 18.3.1
+

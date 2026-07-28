@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import type { AgentEvent, RiskLevel } from "@agent-inspector/core";
+import type { AgentEvent, RiskLevel } from "@kashifmuhammad/agent-inspector-core";
 import { useInspectorStore } from "../store.js";
 
 function formatTime(iso: string): string {
@@ -58,7 +58,7 @@ function StepBody({ event }: { event: AgentEvent }) {
       return (
         <p className="ai-reasoning">
           Run {event.data.status}
-          {event.data.summary ? ` — ${event.data.summary}` : ""}
+          {event.data.summary ? ` - ${event.data.summary}` : ""}
         </p>
       );
     case "reasoning": {
@@ -97,7 +97,7 @@ function StepBody({ event }: { event: AgentEvent }) {
       return (
         <div>
           <span className="ai-step-label ai-step-label--muted">
-            ← {event.data.toolName}
+            {"<-"} {event.data.toolName}
             {event.data.durationMs != null ? ` · ${event.data.durationMs}ms` : ""}
           </span>
           <pre
@@ -207,3 +207,4 @@ export function Timeline({ events }: { events: AgentEvent[] }) {
     </ol>
   );
 }
+

@@ -1,4 +1,4 @@
-import type { ApprovalDecision } from "@agent-inspector/core";
+﻿import type { ApprovalDecision } from "@kashifmuhammad/agent-inspector-core";
 import { getBus } from "../../../src/bus";
 import { NextResponse } from "next/server";
 
@@ -22,3 +22,4 @@ export async function POST(req: Request) {
   bus.decide(body.toolCallId, body.decision);
   return NextResponse.json({ ok: true, toolCallId: body.toolCallId, decision: body.decision });
 }
+

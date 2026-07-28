@@ -1,10 +1,10 @@
-import {
+﻿import {
   adaptRunLog,
   listAdapters,
   MOCK_RUN,
   type AdapterId,
   type AgentRunLog,
-} from "@agent-inspector/core";
+} from "@kashifmuhammad/agent-inspector-core";
 import { Command } from "commander";
 import { existsSync, readFileSync } from "node:fs";
 import { createServer } from "node:http";
@@ -92,10 +92,10 @@ async function main(): Promise<void> {
     );
   } else if (opts.live) {
     bus.startLive(`run_live_${Date.now()}`, "live-agent");
-    console.log("Live mode — POST events to /api/ingest (LangGraph stream shape or native events)");
+    console.log("Live mode - POST events to /api/ingest (LangGraph stream shape or native events)");
   } else {
     bus.loadRun(MOCK_RUN);
-    console.log("No --log provided — loading built-in mock run (demo mode)");
+    console.log("No --log provided - loading built-in mock run (demo mode)");
   }
 
   // Expose bus path for API routes that import from the same package
@@ -108,7 +108,7 @@ async function main(): Promise<void> {
     process.env.NODE_ENV === "development" ||
     !hasProdBuild;
   if (!hasProdBuild && !opts.dev) {
-    console.log("No production build found — starting Next.js in dev mode");
+    console.log("No production build found - starting Next.js in dev mode");
   }
   const app = next({
     dev,
@@ -132,7 +132,7 @@ async function main(): Promise<void> {
   const url = `http://127.0.0.1:${port}`;
   console.log("");
   console.log("  Agent Action Inspector");
-  console.log(`  → ${url}`);
+  console.log(`  -> ${url}`);
   console.log("");
   if (bus.session.mode === "live") {
     console.log("  Ingest:   POST /api/ingest   (LangGraph stream events)");
@@ -147,7 +147,7 @@ async function main(): Promise<void> {
     try {
       await open(url);
     } catch {
-      console.warn("Could not auto-open browser — open the URL above manually.");
+      console.warn("Could not auto-open browser - open the URL above manually.");
     }
   }
 }
@@ -156,3 +156,4 @@ main().catch((err) => {
   console.error(err instanceof Error ? err.message : err);
   process.exit(1);
 });
+

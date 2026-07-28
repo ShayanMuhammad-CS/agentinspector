@@ -1,4 +1,4 @@
-import { defineConfig } from "tsup";
+﻿import { defineConfig } from "tsup";
 
 export default defineConfig([
   {
@@ -8,7 +8,7 @@ export default defineConfig([
     target: "node18",
     clean: true,
     banner: { js: "#!/usr/bin/env node" },
-    external: ["next", "open", "commander", "@agent-inspector/core"],
+    external: ["next", "open", "commander", "@kashifmuhammad/agent-inspector-core"],
   },
   {
     entry: { bus: "src/bus.ts" },
@@ -16,6 +16,7 @@ export default defineConfig([
     platform: "node",
     target: "node18",
     clean: false,
-    external: ["@agent-inspector/core"],
+    external: ["@kashifmuhammad/agent-inspector-core"],
   },
 ]);
+

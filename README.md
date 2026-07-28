@@ -1,8 +1,8 @@
-# Agent Action Inspector
+﻿# Agent Action Inspector
 
 See what your agent did, why, and **Approve / Deny** risky actions before they run.
 
-Runs on **your machine only** — no account, no cloud, no database.
+Runs on **your machine only** - no account, no cloud, no database.
 
 This project is **open source (MIT)**. Community contributions are welcome.
 
@@ -10,15 +10,15 @@ This project is **open source (MIT)**. Community contributions are welcome.
 
 ## Start here (recommended)
 
-This support-desk example does **real work** on local files (read ticket → look up order → create portal link → send email → resolve ticket), then shows the run in the inspector.
+This support-desk example does **real work** on local files (read ticket -> look up order -> create portal link -> send email -> resolve ticket), then shows the run in the inspector.
 
 ### 0) One-time setup
 
 ```powershell
 cd C:\Users\SYS\Desktop\agentinspector
 pnpm install
-pnpm --filter @agent-inspector/core build
-pnpm --filter @agent-inspector/react build
+pnpm --filter @kashifmuhammad/agent-inspector-core build
+pnpm --filter @kashifmuhammad/agent-inspector-react build
 ```
 
 ### 1) Run the agent
@@ -46,13 +46,13 @@ You should see the full timeline. Also check:
 
 ## Live Approve / Deny (real usage)
 
-**Terminal A — start inspector**
+**Terminal A - start inspector**
 
 ```powershell
 pnpm --filter agent-inspector start -- --live --port 8811
 ```
 
-**Terminal B — run agent**
+**Terminal B - run agent**
 
 ```powershell
 $env:INSPECTOR_URL="http://127.0.0.1:8811"
@@ -61,8 +61,8 @@ node examples/real-agent/run.mjs --scripted --live
 
 In the browser, when a risky tool appears (`create_portal_link`, `send_email`, `update_ticket_status`):
 
-- **Approve** → agent continues and writes the file  
-- **Deny** → agent stops; that side effect does not happen  
+- **Approve** -> agent continues and writes the file  
+- **Deny** -> agent stops; that side effect does not happen  
 
 More detail: [`examples/real-agent/README.md`](examples/real-agent/README.md)
 
@@ -79,7 +79,7 @@ More detail: [`examples/real-agent/README.md`](examples/real-agent/README.md)
 
 ---
 
-## What it supports / what it doesn’t
+## What it supports / what it doesn't
 
 ### Built-in adapters (replay via `--log`)
 
@@ -103,11 +103,11 @@ pnpm --filter agent-inspector start -- --log examples/langgraph-messages.json --
 
 | Area | Support |
 |------|---------|
-| **Custom Node / Python agents** | Yes — write generic events or POST `/api/ingest` |
-| **Ollama tool-calling agents** | Yes — see `examples/real-agent` |
-| **Live Approve / Deny** | Yes — `--live` + ingest API |
-| **React embed** | Yes — `@agent-inspector/react` |
-| **Offline localhost** | Yes — no account / cloud |
+| **Custom Node / Python agents** | Yes - write generic events or POST `/api/ingest` |
+| **Ollama tool-calling agents** | Yes - see `examples/real-agent` |
+| **Live Approve / Deny** | Yes - `--live` + ingest API |
+| **React embed** | Yes - `@kashifmuhammad/agent-inspector-react` |
+| **Offline localhost** | Yes - no account / cloud |
 
 ### Works with a thin export (no dedicated adapter yet)
 
@@ -127,7 +127,7 @@ pnpm --filter agent-inspector start -- --log examples/langgraph-messages.json --
 | Multi-agent graph visualization | Single-run timeline only |
 | Mobile apps | Web / React only |
 
-**Rule of thumb:** dump JSON your adapter understands, or emit the **generic** event schema — one UI for every stack.
+**Rule of thumb:** dump JSON your adapter understands, or emit the **generic** event schema - one UI for every stack.
 
 ---
 
@@ -139,7 +139,7 @@ pnpm --filter agent-inspector start -- --log examples/langgraph-messages.json --
 | `--adapter <name>` | `auto` (default) · `generic` · `langgraph` · `openai` · `vercel-ai` |
 | `--live` | Accept live events + approval gate |
 | `--port 8811` | Local port (change if busy) |
-| `--no-open` | Don’t auto-open the browser |
+| `--no-open` | Don't auto-open the browser |
 
 If a port is busy (`EADDRINUSE`), pick another, e.g. `--port 8812`.
 
@@ -195,12 +195,12 @@ Older invoice-only demo: `examples/ollama-agent/run.mjs`
 ## Embed in your React app
 
 ```bash
-pnpm add @agent-inspector/react @agent-inspector/core
+pnpm add @kashifmuhammad/agent-inspector-react @kashifmuhammad/agent-inspector-core
 ```
 
 ```tsx
-import { AgentInspector } from "@agent-inspector/react";
-import "@agent-inspector/react/styles.css";
+import { AgentInspector } from "@kashifmuhammad/agent-inspector-react";
+import "@kashifmuhammad/agent-inspector-react/styles.css";
 
 <AgentInspector log={runLog} mode="replay" />
 ```
@@ -213,7 +213,7 @@ import "@agent-inspector/react/styles.css";
 packages/core     event schema + LangGraph adapter
 packages/react    <AgentInspector /> UI
 packages/cli      local dashboard (agent-inspector)
-examples/real-agent   ← start here (support-desk agent)
+examples/real-agent   <- start here (support-desk agent)
 examples/runs         saved trajectories
 ```
 
@@ -263,3 +263,4 @@ If you want to help, a great first issue is:
 ## License
 
 MIT
+

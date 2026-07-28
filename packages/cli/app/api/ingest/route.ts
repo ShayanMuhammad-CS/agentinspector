@@ -1,7 +1,7 @@
-import {
+﻿import {
   adaptLangGraphStreamEvent,
   type ApprovalConfig,
-} from "@agent-inspector/core";
+} from "@kashifmuhammad/agent-inspector-core";
 import { getBus } from "../../../src/bus";
 import { NextResponse } from "next/server";
 
@@ -19,7 +19,7 @@ export const runtime = "nodejs";
  * When a gated tool call is detected, response includes:
  *   { paused: true, toolCallId, waitUrl: "/api/approval" }
  * and the HTTP handler awaits the operator decision before returning
- * { decision: "approve" | "deny" } — so your bridge can block the agent.
+ * { decision: "approve" | "deny" } - so your bridge can block the agent.
  */
 export async function POST(req: Request) {
   const bus = getBus();
@@ -64,7 +64,7 @@ export async function POST(req: Request) {
   const approvalReq = adapted.find((e) => e.type === "approval_request");
   if (approvalReq && approvalReq.type === "approval_request") {
     const toolCallId = approvalReq.data.toolCallId;
-    // Block this HTTP request until the human decides — pause/resume mechanic
+    // Block this HTTP request until the human decides - pause/resume mechanic
     const decision = await bus.waitForApproval(toolCallId);
     return NextResponse.json({
       ok: true,
@@ -95,7 +95,7 @@ function extractRawEvents(body: unknown): unknown[] {
   return [];
 }
 
-function isAgentEvent(raw: unknown): raw is import("@agent-inspector/core").AgentEvent {
+function isAgentEvent(raw: unknown): raw is import("@kashifmuhammad/agent-inspector-core").AgentEvent {
   return (
     !!raw &&
     typeof raw === "object" &&
@@ -104,3 +104,4 @@ function isAgentEvent(raw: unknown): raw is import("@agent-inspector/core").Agen
     typeof (raw as { runId?: unknown }).runId === "string"
   );
 }
+

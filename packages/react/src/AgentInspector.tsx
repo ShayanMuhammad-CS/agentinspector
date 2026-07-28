@@ -1,7 +1,7 @@
-"use client";
+﻿"use client";
 
-import type { AgentEvent, AgentRunLog } from "@agent-inspector/core";
-import { getPendingApproval } from "@agent-inspector/core";
+import type { AgentEvent, AgentRunLog } from "@kashifmuhammad/agent-inspector-core";
+import { getPendingApproval } from "@kashifmuhammad/agent-inspector-core";
 import { useEffect } from "react";
 import { ApprovalCard } from "./components/ApprovalCard.js";
 import { Timeline } from "./components/Timeline.js";
@@ -14,7 +14,7 @@ import {
 export interface AgentInspectorProps {
   /** Static run log (file / replay mode) */
   log?: AgentRunLog | AgentEvent[];
-  /** Live events — when provided, overrides log and sets live mode */
+  /** Live events - when provided, overrides log and sets live mode */
   events?: AgentEvent[];
   mode?: InspectorMode;
   agentName?: string;
@@ -145,3 +145,4 @@ export { Timeline, TimelineStep } from "./components/Timeline.js";
 export { ApprovalCard } from "./components/ApprovalCard.js";
 export { useInspectorStore } from "./store.js";
 export type { InspectorMode, OnApprovalHandler } from "./store.js";
+

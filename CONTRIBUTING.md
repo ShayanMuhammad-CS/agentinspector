@@ -51,7 +51,7 @@ pnpm -r run build
 ## Code guidelines
 
 - Use TypeScript strict types where possible.
-- Reuse `@agent-inspector/core`; avoid duplicating adapter logic in CLI/UI.
+- Reuse `@kashifmuhammad/agent-inspector-core`; avoid duplicating adapter logic in CLI/UI.
 - Keep backward compatibility for event schema and CLI flags when possible.
 - Prefer explicit, readable code over clever abstractions.
 
@@ -81,3 +81,4 @@ If you find a serious vulnerability, open a private disclosure channel first (to
 ## License
 
 By contributing, you agree your contributions are licensed under the MIT License.
+

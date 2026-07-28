@@ -1,7 +1,7 @@
-"use client";
+﻿"use client";
 
-import type { AgentEvent, ApprovalDecision, PendingApproval } from "@agent-inspector/core";
-import { getPendingApproval } from "@agent-inspector/core";
+import type { AgentEvent, ApprovalDecision, PendingApproval } from "@kashifmuhammad/agent-inspector-core";
+import { getPendingApproval } from "@kashifmuhammad/agent-inspector-core";
 import { create } from "zustand";
 
 export type InspectorMode = "replay" | "live";
@@ -55,3 +55,4 @@ export type OnApprovalHandler = (
   toolCallId: string,
   decision: ApprovalDecision
 ) => void | Promise<void>;
+
