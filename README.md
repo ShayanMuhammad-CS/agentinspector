@@ -1,4 +1,4 @@
-﻿# Agent Action Inspector
+# Agent Action Inspector
 
 See what your agent did, why, and **Approve / Deny** risky actions before they run.
 
@@ -30,7 +30,7 @@ node examples/real-agent/run.mjs --scripted
 ### 2) Open the inspector
 
 ```powershell
-pnpm --filter agent-inspector start -- --log examples/runs/support-desk-last.json --port 8811
+pnpm --filter @kashifmuhammad/agent-inspector start -- --log examples/runs/support-desk-last.json --port 8811
 ```
 
 Open **http://127.0.0.1:8811**
@@ -49,7 +49,7 @@ You should see the full timeline. Also check:
 **Terminal A - start inspector**
 
 ```powershell
-pnpm --filter agent-inspector start -- --live --port 8811
+pnpm --filter @kashifmuhammad/agent-inspector start -- --live --port 8811
 ```
 
 **Terminal B - run agent**
@@ -94,9 +94,9 @@ More detail: [`examples/real-agent/README.md`](examples/real-agent/README.md)
 Try the samples:
 
 ```powershell
-pnpm --filter agent-inspector start -- --log examples/openai-agents-run.json --port 8811
-pnpm --filter agent-inspector start -- --log examples/vercel-ai-run.json --port 8812
-pnpm --filter agent-inspector start -- --log examples/langgraph-messages.json --port 8813
+pnpm --filter @kashifmuhammad/agent-inspector start -- --log examples/openai-agents-run.json --port 8811
+pnpm --filter @kashifmuhammad/agent-inspector start -- --log examples/vercel-ai-run.json --port 8812
+pnpm --filter @kashifmuhammad/agent-inspector start -- --log examples/langgraph-messages.json --port 8813
 ```
 
 ### Also supported
@@ -150,7 +150,7 @@ If a port is busy (`EADDRINUSE`), pick another, e.g. `--port 8812`.
 ### After a run (replay)
 
 ```powershell
-pnpm --filter agent-inspector start -- --log .\my-run.json --adapter auto --port 8811
+pnpm --filter @kashifmuhammad/agent-inspector start -- --log .\my-run.json --adapter auto --port 8811
 ```
 
 Or force a stack: `--adapter openai` / `--adapter vercel-ai` / `--adapter langgraph` / `--adapter generic`.

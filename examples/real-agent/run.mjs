@@ -12,10 +12,10 @@
  *
  * --- Replay after the run (most common) ---
  *   node examples/real-agent/run.mjs
- *   pnpm --filter agent-inspector start -- --log examples/runs/support-desk-last.json --port 8811
+ *   pnpm --filter @kashifmuhammad/agent-inspector start -- --log examples/runs/support-desk-last.json --port 8811
  *
  * --- Live HITL (production-style) ---
- *   terminal A: pnpm --filter agent-inspector start -- --live --port 8811
+ *   terminal A: pnpm --filter @kashifmuhammad/agent-inspector start -- --live --port 8811
  *   terminal B: node examples/real-agent/run.mjs --live
  *               (or --scripted --live for a guaranteed multi-tool path)
  *
@@ -429,7 +429,7 @@ function saveRun() {
   if (!LIVE) {
     console.log("\nInspect with:");
     console.log(
-      `  pnpm --filter agent-inspector start -- --log examples/runs/support-desk-last.json --port 8811`
+      `  pnpm --filter @kashifmuhammad/agent-inspector start -- --log examples/runs/support-desk-last.json --port 8811`
     );
   } else {
     console.log("\nLive events were streamed to the inspector.");

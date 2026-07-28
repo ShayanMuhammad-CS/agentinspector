@@ -1,6 +1,6 @@
 {
-  "name": "agent-inspector",
-  "version": "0.1.0",
+  "name": "@kashifmuhammad/agent-inspector",
+  "version": "0.1.2",
   "description": "CLI to inspect LangGraph agent trajectories locally - zero infra, localhost only",
   "type": "module",
   "bin": {
@@ -25,8 +25,8 @@
     "clean": "rimraf dist .next"
   },
   "dependencies": {
-    "@kashifmuhammad/agent-inspector-core": "workspace:*",
-    "@kashifmuhammad/agent-inspector-react": "workspace:*",
+    "@kashifmuhammad/agent-inspector-core": "^0.1.1",
+    "@kashifmuhammad/agent-inspector-react": "^0.1.1",
     "commander": "^12.1.0",
     "next": "^14.2.21",
     "open": "^10.1.0",

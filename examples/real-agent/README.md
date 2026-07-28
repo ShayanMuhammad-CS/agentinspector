@@ -19,7 +19,7 @@ Risky steps (3–5) need **Approve** in live mode.
 ```powershell
 node examples/real-agent/run.mjs --scripted
 
-pnpm --filter agent-inspector start -- --log examples/runs/support-desk-last.json --port 8811
+pnpm --filter @kashifmuhammad/agent-inspector start -- --log examples/runs/support-desk-last.json --port 8811
 ```
 
 Open http://127.0.0.1:8811
@@ -31,7 +31,7 @@ Open http://127.0.0.1:8811
 **Terminal A**
 
 ```powershell
-pnpm --filter agent-inspector start -- --live --port 8811
+pnpm --filter @kashifmuhammad/agent-inspector start -- --live --port 8811
 ```
 
 **Terminal B**

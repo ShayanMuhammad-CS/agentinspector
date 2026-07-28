@@ -1,12 +1,12 @@
 {
   "name": "agent-inspector-monorepo",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Visualize LangGraph agent trajectories and gate risky actions behind human approval",
   "scripts": {
     "build": "pnpm -r run build",
-    "dev": "pnpm --filter agent-inspector dev",
-    "dev:cli": "pnpm --filter agent-inspector start -- --log examples/mock-run.json",
+    "dev": "pnpm --filter @kashifmuhammad/agent-inspector dev",
+    "dev:cli": "pnpm --filter @kashifmuhammad/agent-inspector start -- --log examples/mock-run.json",
     "typecheck": "pnpm -r run typecheck",
     "clean": "pnpm -r run clean"
   },

@@ -1,4 +1,4 @@
-﻿lockfileVersion: '9.0'
+lockfileVersion: '9.0'
 
 settings:
   autoInstallPeers: true
@@ -11,11 +11,11 @@ importers:
   packages/cli:
     dependencies:
       '@kashifmuhammad/agent-inspector-core':
-        specifier: workspace:*
-        version: link:../core
+        specifier: ^0.1.1
+        version: 0.1.1
       '@kashifmuhammad/agent-inspector-react':
-        specifier: workspace:*
-        version: link:../react
+        specifier: ^0.1.1
+        version: 0.1.1(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       commander:
         specifier: ^12.1.0
         version: 12.1.0
@@ -69,8 +69,8 @@ importers:
   packages/react:
     dependencies:
       '@kashifmuhammad/agent-inspector-core':
-        specifier: workspace:*
-        version: link:../core
+        specifier: ^0.1.1
+        version: 0.1.1
       zustand:
         specifier: ^5.0.2
         version: 5.0.14(@types/react@18.3.31)(react@18.3.1)
@@ -423,6 +423,15 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
+
+  '@kashifmuhammad/agent-inspector-core@0.1.1':
+    resolution: {integrity: sha512-ucNMTCcHhfBCi/vex0wpmDJQAZvjtAa6oO9W+q9/XF/N2lxNiHKiVg6Om63M/zbVCkKLNa1D/fPhrKE3ebkYLQ==}
+
+  '@kashifmuhammad/agent-inspector-react@0.1.1':
+    resolution: {integrity: sha512-luYu0V0cu3LzHhL1TdlkQtXaYEaYPUkif2eeohsrMsiet3ARWs4+Nrw0g6bmtEDvSc/jo+xwC4ZgStezrdEfcg==}
+    peerDependencies:
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
 
   '@next/env@14.2.35':
     resolution: {integrity: sha512-DuhvCtj4t9Gwrx80dmz2F4t/zKQ4ktN8WrMwOuVzkJfBilwAwGr6v16M5eI8yCuZ63H9TTuEU09Iu2HqkzFPVQ==}
@@ -1200,6 +1209,19 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
+  '@kashifmuhammad/agent-inspector-core@0.1.1': {}
+
+  '@kashifmuhammad/agent-inspector-react@0.1.1(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@kashifmuhammad/agent-inspector-core': link:packages/core
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      zustand: 5.0.14(@types/react@18.3.31)(react@18.3.1)
+    transitivePeerDependencies:
+      - '@types/react'
+      - immer
+      - use-sync-external-store
+
   '@next/env@14.2.35': {}
 
   '@next/swc-darwin-arm64@14.2.33':
@@ -1730,4 +1752,3 @@ snapshots:
     optionalDependencies:
       '@types/react': 18.3.31
       react: 18.3.1
-

@@ -14,10 +14,10 @@
  *   node examples/ollama-agent/run.mjs
  *
  *   # 2) Inspect it (another terminal, or after it finishes)
- *   pnpm --filter agent-inspector start -- --log examples/runs/ollama-last.json
+ *   pnpm --filter @kashifmuhammad/agent-inspector start -- --log examples/runs/ollama-last.json
  *
  * Live mode (HITL — high-risk tools pause until you Approve/Deny):
- *   terminal A:  pnpm --filter agent-inspector start -- --live --port 8787
+ *   terminal A:  pnpm --filter @kashifmuhammad/agent-inspector start -- --live --port 8787
  *   terminal B:  node examples/ollama-agent/run.mjs --live
  *
  * Env:
@@ -377,7 +377,7 @@ async function main() {
     console.log("");
     console.log("Inspect with:");
     console.log(
-      `  pnpm --filter agent-inspector start -- --log examples/runs/ollama-last.json`
+      `  pnpm --filter @kashifmuhammad/agent-inspector start -- --log examples/runs/ollama-last.json`
     );
   } else {
     console.log("Live events were streamed to the inspector dashboard.");

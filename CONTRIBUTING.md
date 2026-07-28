@@ -1,4 +1,4 @@
-﻿# Contributing to Agent Action Inspector
+# Contributing to Agent Action Inspector
 
 Thanks for helping improve Agent Action Inspector.
 
@@ -31,7 +31,7 @@ Run the real example:
 
 ```powershell
 node examples/real-agent/run.mjs --scripted
-pnpm --filter agent-inspector start -- --log examples/runs/support-desk-last.json --port 8811
+pnpm --filter @kashifmuhammad/agent-inspector start -- --log examples/runs/support-desk-last.json --port 8811
 ```
 
 ## Development workflow

@@ -2,7 +2,7 @@
  * Minimal bridge: forward LangGraph-style stream events to a local inspector.
  *
  * Usage:
- *   1. terminal A:  pnpm --filter agent-inspector start -- --live --port 8787
+ *   1. terminal A:  pnpm --filter @kashifmuhammad/agent-inspector start -- --live --port 8787
  *   2. terminal B:  node examples/live-bridge.mjs
  *
  * Your real agent should POST each astream_events chunk the same way.
