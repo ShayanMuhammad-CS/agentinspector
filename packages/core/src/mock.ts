@@ -1,0 +1,223 @@
+import type { AgentRunLog } from "./schema.js";
+
+/** Demo trajectory used when no --log is provided */
+export const MOCK_RUN: AgentRunLog = {
+  version: 1,
+  runId: "run_mock_demo",
+  agentName: "support-triage-agent",
+  startedAt: "2026-07-27T08:00:00.000Z",
+  endedAt: "2026-07-27T08:00:12.400Z",
+  events: [
+    {
+      id: "evt_1",
+      type: "run_start",
+      timestamp: "2026-07-27T08:00:00.000Z",
+      runId: "run_mock_demo",
+      stepIndex: 0,
+      data: {
+        agentName: "support-triage-agent",
+        threadId: "thread_42",
+        metadata: { source: "mock" },
+      },
+    },
+    {
+      id: "evt_2",
+      type: "reasoning",
+      timestamp: "2026-07-27T08:00:01.200Z",
+      runId: "run_mock_demo",
+      stepIndex: 1,
+      data: {
+        content:
+          "User reports they cannot access invoice #4821. I should look up the invoice, check account status, then decide whether to resend the link or escalate.",
+        model: "gpt-4o",
+      },
+    },
+    {
+      id: "evt_3",
+      type: "tool_call",
+      timestamp: "2026-07-27T08:00:02.100Z",
+      runId: "run_mock_demo",
+      stepIndex: 2,
+      data: {
+        toolName: "lookup_invoice",
+        toolCallId: "tc_1",
+        input: { invoiceId: "4821" },
+        riskLevel: "low",
+        requiresApproval: false,
+      },
+    },
+    {
+      id: "evt_4",
+      type: "tool_result",
+      timestamp: "2026-07-27T08:00:02.800Z",
+      runId: "run_mock_demo",
+      stepIndex: 3,
+      data: {
+        toolName: "lookup_invoice",
+        toolCallId: "tc_1",
+        output: {
+          invoiceId: "4821",
+          status: "paid",
+          customerId: "cust_918",
+          amount: 2400,
+          currency: "USD",
+        },
+        durationMs: 640,
+      },
+    },
+    {
+      id: "evt_5",
+      type: "reasoning",
+      timestamp: "2026-07-27T08:00:04.000Z",
+      runId: "run_mock_demo",
+      stepIndex: 4,
+      data: {
+        content:
+          "Invoice is paid. Account may have a stale portal session. I'll refresh the customer portal link and email it to the billing contact.",
+      },
+    },
+    {
+      id: "evt_6",
+      type: "tool_call",
+      timestamp: "2026-07-27T08:00:05.200Z",
+      runId: "run_mock_demo",
+      stepIndex: 5,
+      data: {
+        toolName: "create_portal_link",
+        toolCallId: "tc_2",
+        input: { customerId: "cust_918", invoiceId: "4821" },
+        riskLevel: "high",
+        requiresApproval: true,
+      },
+    },
+    {
+      id: "evt_7",
+      type: "approval_request",
+      timestamp: "2026-07-27T08:00:05.210Z",
+      runId: "run_mock_demo",
+      stepIndex: 6,
+      data: {
+        toolCallId: "tc_2",
+        toolName: "create_portal_link",
+        input: { customerId: "cust_918", invoiceId: "4821" },
+        riskLevel: "high",
+        actionSummary: "create portal link on cust_918",
+        resource: "cust_918",
+      },
+    },
+    {
+      id: "evt_8",
+      type: "approval_response",
+      timestamp: "2026-07-27T08:00:08.000Z",
+      runId: "run_mock_demo",
+      stepIndex: 7,
+      data: {
+        toolCallId: "tc_2",
+        decision: "approve",
+        decidedAt: "2026-07-27T08:00:08.000Z",
+        decidedBy: "operator",
+      },
+    },
+    {
+      id: "evt_9",
+      type: "tool_result",
+      timestamp: "2026-07-27T08:00:08.500Z",
+      runId: "run_mock_demo",
+      stepIndex: 8,
+      data: {
+        toolName: "create_portal_link",
+        toolCallId: "tc_2",
+        output: {
+          url: "https://billing.example.com/portal/sess_abc",
+          expiresAt: "2026-07-27T09:00:00.000Z",
+        },
+        durationMs: 480,
+      },
+    },
+    {
+      id: "evt_10",
+      type: "tool_call",
+      timestamp: "2026-07-27T08:00:09.100Z",
+      runId: "run_mock_demo",
+      stepIndex: 9,
+      data: {
+        toolName: "send_email",
+        toolCallId: "tc_3",
+        input: {
+          to: "billing@acme.co",
+          subject: "Your invoice portal link",
+          body: "Here is a fresh link to invoice #4821: https://billing.example.com/portal/sess_abc",
+        },
+        riskLevel: "high",
+        requiresApproval: true,
+      },
+    },
+    {
+      id: "evt_11",
+      type: "approval_request",
+      timestamp: "2026-07-27T08:00:09.110Z",
+      runId: "run_mock_demo",
+      stepIndex: 10,
+      data: {
+        toolCallId: "tc_3",
+        toolName: "send_email",
+        input: {
+          to: "billing@acme.co",
+          subject: "Your invoice portal link",
+          body: "Here is a fresh link to invoice #4821: https://billing.example.com/portal/sess_abc",
+        },
+        riskLevel: "high",
+        actionSummary: "send email on billing@acme.co",
+        resource: "billing@acme.co",
+      },
+    },
+    {
+      id: "evt_12",
+      type: "approval_response",
+      timestamp: "2026-07-27T08:00:11.000Z",
+      runId: "run_mock_demo",
+      stepIndex: 11,
+      data: {
+        toolCallId: "tc_3",
+        decision: "approve",
+        decidedAt: "2026-07-27T08:00:11.000Z",
+        decidedBy: "operator",
+      },
+    },
+    {
+      id: "evt_13",
+      type: "tool_result",
+      timestamp: "2026-07-27T08:00:11.400Z",
+      runId: "run_mock_demo",
+      stepIndex: 12,
+      data: {
+        toolName: "send_email",
+        toolCallId: "tc_3",
+        output: { messageId: "msg_771", status: "queued" },
+        durationMs: 320,
+      },
+    },
+    {
+      id: "evt_14",
+      type: "reasoning",
+      timestamp: "2026-07-27T08:00:12.000Z",
+      runId: "run_mock_demo",
+      stepIndex: 13,
+      data: {
+        content:
+          "Portal link created and email queued. I can close the ticket as resolved.",
+      },
+    },
+    {
+      id: "evt_15",
+      type: "run_end",
+      timestamp: "2026-07-27T08:00:12.400Z",
+      runId: "run_mock_demo",
+      stepIndex: 14,
+      data: {
+        status: "success",
+        summary: "Refreshed portal link and emailed billing contact.",
+      },
+    },
+  ],
+};

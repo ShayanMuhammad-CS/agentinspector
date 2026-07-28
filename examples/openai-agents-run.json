@@ -1,0 +1,74 @@
+{
+  "provider": "openai-agents",
+  "runId": "run_openai_demo",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Refund order ORD-4821 and email the customer."
+    },
+    {
+      "role": "assistant",
+      "content": "I'll look up the order, then issue a refund and email confirmation.",
+      "tool_calls": [
+        {
+          "id": "call_lookup",
+          "type": "function",
+          "function": {
+            "name": "lookup_order",
+            "arguments": "{\"orderId\":\"ORD-4821\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_lookup",
+      "name": "lookup_order",
+      "content": "{\"orderId\":\"ORD-4821\",\"status\":\"paid\",\"email\":\"billing@acme.co\",\"amount\":2400}"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+        {
+          "id": "call_refund",
+          "type": "function",
+          "function": {
+            "name": "create_refund",
+            "arguments": "{\"orderId\":\"ORD-4821\",\"amount\":2400}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_refund",
+      "name": "create_refund",
+      "content": "{\"refundId\":\"rf_91\",\"status\":\"succeeded\"}"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+        {
+          "id": "call_email",
+          "type": "function",
+          "function": {
+            "name": "send_email",
+            "arguments": "{\"to\":\"billing@acme.co\",\"subject\":\"Refund processed\",\"body\":\"Your refund for ORD-4821 has been issued.\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_email",
+      "name": "send_email",
+      "content": "{\"messageId\":\"msg_22\",\"status\":\"queued\"}"
+    },
+    {
+      "role": "assistant",
+      "content": "Refund issued and confirmation emailed to billing@acme.co."
+    }
+  ]
+}

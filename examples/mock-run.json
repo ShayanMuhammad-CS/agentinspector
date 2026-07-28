@@ -1,0 +1,135 @@
+{
+  "version": 1,
+  "runId": "run_example_invoice",
+  "agentName": "support-triage-agent",
+  "startedAt": "2026-07-27T08:00:00.000Z",
+  "endedAt": "2026-07-27T08:00:12.400Z",
+  "events": [
+    {
+      "id": "evt_1",
+      "type": "run_start",
+      "timestamp": "2026-07-27T08:00:00.000Z",
+      "runId": "run_example_invoice",
+      "stepIndex": 0,
+      "data": {
+        "agentName": "support-triage-agent",
+        "threadId": "thread_42"
+      }
+    },
+    {
+      "id": "evt_2",
+      "type": "reasoning",
+      "timestamp": "2026-07-27T08:00:01.200Z",
+      "runId": "run_example_invoice",
+      "stepIndex": 1,
+      "data": {
+        "content": "User cannot access invoice #4821. Look up the invoice, then refresh the portal link and email billing."
+      }
+    },
+    {
+      "id": "evt_3",
+      "type": "tool_call",
+      "timestamp": "2026-07-27T08:00:02.100Z",
+      "runId": "run_example_invoice",
+      "stepIndex": 2,
+      "data": {
+        "toolName": "lookup_invoice",
+        "toolCallId": "tc_1",
+        "input": { "invoiceId": "4821" },
+        "riskLevel": "low",
+        "requiresApproval": false
+      }
+    },
+    {
+      "id": "evt_4",
+      "type": "tool_result",
+      "timestamp": "2026-07-27T08:00:02.800Z",
+      "runId": "run_example_invoice",
+      "stepIndex": 3,
+      "data": {
+        "toolName": "lookup_invoice",
+        "toolCallId": "tc_1",
+        "output": {
+          "invoiceId": "4821",
+          "status": "paid",
+          "customerId": "cust_918"
+        },
+        "durationMs": 640
+      }
+    },
+    {
+      "id": "evt_5",
+      "type": "tool_call",
+      "timestamp": "2026-07-27T08:00:05.200Z",
+      "runId": "run_example_invoice",
+      "stepIndex": 4,
+      "data": {
+        "toolName": "send_email",
+        "toolCallId": "tc_2",
+        "input": {
+          "to": "billing@acme.co",
+          "subject": "Your invoice portal link",
+          "body": "Fresh link for invoice #4821"
+        },
+        "riskLevel": "high",
+        "requiresApproval": true
+      }
+    },
+    {
+      "id": "evt_6",
+      "type": "approval_request",
+      "timestamp": "2026-07-27T08:00:05.210Z",
+      "runId": "run_example_invoice",
+      "stepIndex": 5,
+      "data": {
+        "toolCallId": "tc_2",
+        "toolName": "send_email",
+        "input": {
+          "to": "billing@acme.co",
+          "subject": "Your invoice portal link",
+          "body": "Fresh link for invoice #4821"
+        },
+        "riskLevel": "high",
+        "actionSummary": "send email on billing@acme.co",
+        "resource": "billing@acme.co"
+      }
+    },
+    {
+      "id": "evt_7",
+      "type": "approval_response",
+      "timestamp": "2026-07-27T08:00:08.000Z",
+      "runId": "run_example_invoice",
+      "stepIndex": 6,
+      "data": {
+        "toolCallId": "tc_2",
+        "decision": "approve",
+        "decidedAt": "2026-07-27T08:00:08.000Z",
+        "decidedBy": "operator"
+      }
+    },
+    {
+      "id": "evt_8",
+      "type": "tool_result",
+      "timestamp": "2026-07-27T08:00:08.500Z",
+      "runId": "run_example_invoice",
+      "stepIndex": 7,
+      "data": {
+        "toolName": "send_email",
+        "toolCallId": "tc_2",
+        "output": { "messageId": "msg_771", "status": "queued" },
+        "durationMs": 320
+      }
+    },
+    {
+      "id": "evt_9",
+      "type": "run_end",
+      "timestamp": "2026-07-27T08:00:12.400Z",
+      "runId": "run_example_invoice",
+      "stepIndex": 8,
+      "data": {
+        "status": "success",
+        "summary": "Emailed billing contact a fresh portal link."
+      }
+    }
+  ]
+}

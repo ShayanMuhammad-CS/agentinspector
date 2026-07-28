@@ -1,0 +1,24 @@
+{
+  "orders": {
+    "ORD-4821": {
+      "orderId": "ORD-4821",
+      "customerId": "cust_918",
+      "email": "billing@acme.co",
+      "status": "paid",
+      "amount": 2400,
+      "currency": "USD",
+      "invoiceId": "INV-4821",
+      "portalExpired": true
+    },
+    "ORD-1999": {
+      "orderId": "ORD-1999",
+      "customerId": "cust_044",
+      "email": "ops@example.com",
+      "status": "pending",
+      "amount": 120,
+      "currency": "USD",
+      "invoiceId": "INV-1999",
+      "portalExpired": false
+    }
+  }
+}

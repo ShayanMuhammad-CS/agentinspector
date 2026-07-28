@@ -1,0 +1,46 @@
+{
+  "messages": [
+    {
+      "type": "human",
+      "content": "Delete the staging database table tmp_orders."
+    },
+    {
+      "type": "ai",
+      "content": "I will drop the temporary table after confirming the name.",
+      "tool_calls": [
+        {
+          "id": "call_1",
+          "name": "list_tables",
+          "args": { "schema": "staging" }
+        }
+      ]
+    },
+    {
+      "type": "tool",
+      "name": "list_tables",
+      "tool_call_id": "call_1",
+      "content": "[\"tmp_orders\", \"tmp_sessions\"]"
+    },
+    {
+      "type": "ai",
+      "content": "Found tmp_orders. Proceeding to drop it.",
+      "tool_calls": [
+        {
+          "id": "call_2",
+          "name": "delete_table",
+          "args": { "table": "tmp_orders", "schema": "staging" }
+        }
+      ]
+    },
+    {
+      "type": "tool",
+      "name": "delete_table",
+      "tool_call_id": "call_2",
+      "content": "{\"dropped\": true}"
+    },
+    {
+      "type": "ai",
+      "content": "Done. staging.tmp_orders has been dropped."
+    }
+  ]
+}
