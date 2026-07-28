@@ -1,7 +1,7 @@
 {
   "name": "agent-inspector-monorepo",
   "private": true,
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Visualize LangGraph agent trajectories and gate risky actions behind human approval",
   "scripts": {
     "build": "pnpm -r run build",

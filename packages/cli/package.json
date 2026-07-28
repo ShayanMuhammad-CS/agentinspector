@@ -1,6 +1,6 @@
 {
   "name": "@kashifmuhammad/agent-inspector",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "CLI to inspect LangGraph agent trajectories locally - zero infra, localhost only",
   "type": "module",
   "bin": {
@@ -27,20 +27,20 @@
   "dependencies": {
     "@kashifmuhammad/agent-inspector-core": "^0.1.1",
     "@kashifmuhammad/agent-inspector-react": "^0.1.1",
+    "@types/node": "^22.10.2",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
     "commander": "^12.1.0",
     "next": "^14.2.21",
     "open": "^10.1.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "typescript": "^5.7.2"
   },
   "devDependencies": {
-    "@types/node": "^22.10.2",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
     "rimraf": "^6.0.1",
     "tsup": "^8.3.5",
-    "tsx": "^4.19.2",
-    "typescript": "^5.7.2"
+    "tsx": "^4.19.2"
   },
   "license": "MIT",
   "publishConfig": {
