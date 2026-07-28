@@ -1,0 +1,26 @@
+import { getBus } from "../../../dist/bus.js";
+import { NextResponse } from "next/server";
+
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+
+export async function POST(req) {
+  const body = await req.json();
+  if (
+    !body.toolCallId ||
+    (body.decision !== "approve" && body.decision !== "deny")
+  ) {
+    return NextResponse.json(
+      { error: "Expected { toolCallId: string, decision: 'approve' | 'deny' }" },
+      { status: 400 }
+    );
+  }
+
+  const bus = getBus();
+  bus.decide(body.toolCallId, body.decision);
+  return NextResponse.json({
+    ok: true,
+    toolCallId: body.toolCallId,
+    decision: body.decision,
+  });
+}

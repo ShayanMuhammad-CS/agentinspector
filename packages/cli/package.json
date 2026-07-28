@@ -1,6 +1,6 @@
 {
   "name": "@kashifmuhammad/agent-inspector",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "description": "CLI to inspect LangGraph agent trajectories locally - zero infra, localhost only",
   "type": "module",
   "bin": {
