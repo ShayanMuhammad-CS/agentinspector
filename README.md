@@ -4,6 +4,8 @@ See what your agent did, why, and **Approve / Deny** risky actions before they r
 
 Runs on **your machine only** — no account, no cloud, no database.
 
+This project is **open source (MIT)**. Community contributions are welcome.
+
 ---
 
 ## Start here (recommended)
@@ -216,6 +218,45 @@ examples/runs         saved trajectories
 ```
 
 **Assumptions:** pnpm workspaces, package scope `@agent-inspector/*`, Node 18+.
+
+---
+
+## Community and contribution
+
+- Contribution guide: [`CONTRIBUTING.md`](CONTRIBUTING.md)
+- Code of Conduct: [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md)
+- Issue templates: [`.github/ISSUE_TEMPLATE`](.github/ISSUE_TEMPLATE)
+- PR template: [`.github/PULL_REQUEST_TEMPLATE.md`](.github/PULL_REQUEST_TEMPLATE.md)
+
+If you want to help, a great first issue is:
+
+- adapter improvements (`auto` detection, new framework mappings)
+- tests for replay/live flows
+- docs and starter integrations for real agents
+- timeline UX polish
+
+---
+
+## Public roadmap (non-MVP direction)
+
+### v1.1 (stability + adoption)
+
+- expand adapter coverage (OpenAI/Vercel improvements, new stack exports)
+- increase test coverage (adapter fixtures + live gate e2e)
+- improve CLI config (`--adapter auto` behavior, better error messages)
+- add more real integration examples (Python + JS)
+
+### v1.2 (team workflows)
+
+- richer approval policies (rule presets, per-tool/per-risk policies)
+- approval metadata (who approved, reason/comment, timestamp UI polish)
+- improved replay filtering/search and run comparisons
+
+### v2.0 (team-ready platform surface)
+
+- optional shared self-hosted service mode (still keep local-first mode)
+- RBAC-style approval roles
+- stronger audit exports and compliance-friendly reporting
 
 ---
 
