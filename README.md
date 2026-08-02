@@ -1,198 +1,136 @@
-# Agent Action Inspector
+<div align="center">
 
-See what your agent did, why, and **Approve / Deny** risky actions before they run.
+  <h1>🛡️ Agent Action Inspector</h1>
+  <p><strong>Inspect what your AI agent did, replay execution trajectories, & Approve / Deny risky actions before execution</strong></p>
 
-Runs on **your machine only** - no account, no cloud, no database.
+  <p>
+    <a href="https://github.com/kashifdevfe/agentinspector/stargazers">
+      <img src="https://img.shields.io/github/stars/kashifdevfe/agentinspector?style=for-the-badge&color=gold&logo=github" alt="Stars"/>
+    </a>
+    <a href="https://github.com/kashifdevfe/agentinspector/blob/main/LICENSE">
+      <img src="https://img.shields.io/github/license/kashifdevfe/agentinspector?style=for-the-badge&color=blue" alt="License"/>
+    </a>
+    <img src="https://img.shields.io/badge/TypeScript-5.0%2B-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript"/>
+    <img src="https://img.shields.io/badge/React-18%2B-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React"/>
+    <img src="https://img.shields.io/badge/Local--First-Security-black?style=for-the-badge" alt="Local First"/>
+    <img src="https://img.shields.io/badge/PRs-Welcome-brightgreen?style=for-the-badge" alt="PRs Welcome"/>
+  </p>
 
-This project is **open source (MIT)**. Community contributions are welcome.
+  <a href="#-quickstart">🚀 Quickstart</a> •
+  <a href="#-features">✨ Features</a> •
+  <a href="#-architecture">🏗️ Architecture</a> •
+  <a href="#-adapters">🔌 Adapters</a> •
+  <a href="#-roadmap">🗺️ Roadmap</a>
+
+</div>
+
+<br/>
 
 ---
 
-## Start here (recommended)
+## 📌 Overview
 
-This support-desk example does **real work** on local files (read ticket -> look up order -> create portal link -> send email -> resolve ticket), then shows the run in the inspector.
+**Agent Action Inspector** is a local-first observability and human-in-the-loop governance tool for AI coding agents and autonomous workflows. It provides real-time trajectory inspection, tool execution replays, and live **Approve / Deny** safety gates.
 
-### 0) One-time setup
+> 🔒 **100% Local & Private**: Runs entirely on your local machine with zero external cloud dependencies, accounts, or telemetry databases.
+
+---
+
+## ✨ Features
+
+- 📜 **Trajectory Timeline**: Real-time visualization of LLM reasoning, tool calls, and input/output payloads.
+- 🛑 **Live Approval Gate**: Pause high-risk tools (e.g. sending emails, deleting files, database writes) until approved by a human.
+- 🔁 **Offline Replay**: Load and analyze past agent run logs from JSON files.
+- 🔌 **Universal Framework Adapters**: Native support for LangGraph/LangChain, OpenAI Agents, Vercel AI SDK, and generic event schemas.
+- ⚛️ **Embeddable Component**: Drop `<AgentInspector />` directly into any React application.
+
+---
+
+## 🏗️ Architecture
+
+```mermaid
+graph TD
+    A[🤖 Autonomous AI Agent] -->|1. Event Stream / Ingest API| B[⚡ Ingest Server - :8811]
+    
+    subgraph Agent Inspector Local Engine
+        B --> C{🛡️ Safety Gate Policy}
+        C -->|Low Risk Tool| D[✅ Auto-Execute Action]
+        C -->|High Risk Tool| E[⏸️ Pause Agent Execution]
+        
+        E --> F[🖥️ Local Web UI Dashboard]
+        F -->|Human Approves| G[✅ Resume Agent Action]
+        F -->|Human Denies| H[🚫 Cancel Action & Throw Safety Error]
+    end
+
+    D --> I[📁 Local Filesystem / APIs]
+    G --> I
+```
+
+---
+
+## 🚀 Quickstart
+
+### 1. One-Time Setup
 
 ```powershell
-cd C:\Users\SYS\Desktop\agentinspector
+# Clone the repository
+git clone https://github.com/kashifdevfe/agentinspector.git
+cd agentinspector
+
+# Install dependencies and build packages
 pnpm install
 pnpm --filter @kashifmuhammad/agent-inspector-core build
 pnpm --filter @kashifmuhammad/agent-inspector-react build
 ```
 
-### 1) Run the agent
+### 2. Run Demo Agent
 
 ```powershell
 node examples/real-agent/run.mjs --scripted
 ```
 
-### 2) Open the inspector
+### 3. Open Inspector Dashboard
 
 ```powershell
 pnpm --filter @kashifmuhammad/agent-inspector start -- --log examples/runs/support-desk-last.json --port 8811
 ```
 
-Open **http://127.0.0.1:8811**
-
-You should see the full timeline. Also check:
-
-| Path | What changed |
-|------|----------------|
-| `examples/real-agent/outbox/` | Real portal + email files |
-| `examples/real-agent/workspace/ticket-status.json` | Ticket marked `resolved` |
+Open **`http://127.0.0.1:8811`** in your browser to view the trajectory timeline!
 
 ---
 
-## Live Approve / Deny (real usage)
+## 🎛️ Live Approve / Deny (Human-in-the-Loop)
 
-**Terminal A - start inspector**
-
+### Terminal A - Start Inspector Server
 ```powershell
 pnpm --filter @kashifmuhammad/agent-inspector start -- --live --port 8811
 ```
 
-**Terminal B - run agent**
-
+### Terminal B - Run Agent in Live Mode
 ```powershell
 $env:INSPECTOR_URL="http://127.0.0.1:8811"
 node examples/real-agent/run.mjs --scripted --live
 ```
 
-In the browser, when a risky tool appears (`create_portal_link`, `send_email`, `update_ticket_status`):
-
-- **Approve** -> agent continues and writes the file  
-- **Deny** -> agent stops; that side effect does not happen  
-
-More detail: [`examples/real-agent/README.md`](examples/real-agent/README.md)
+When a risky action triggers (`create_portal_link`, `send_email`, `update_ticket_status`):
+- Click **Approve** in the browser -> Agent completes execution.
+- Click **Deny** in the browser -> Agent cancels the action safely.
 
 ---
 
-## What this product does
+## 🔌 Supported Adapters
 
-| Feature | Meaning |
-|---------|---------|
-| Trajectory timeline | Reasoning, tool calls, inputs/outputs |
-| Replay | Open a past JSON run with `--log` |
-| Live gate | Pause risky tools until a human decides |
-| Embed | Drop `<AgentInspector />` into your React app |
-
----
-
-## What it supports / what it doesn't
-
-### Built-in adapters (replay via `--log`)
-
-| Adapter | Flag | Input shape |
-|---------|------|-------------|
-| **Auto-detect** | `--adapter auto` (default) | Sniffs the JSON and picks one below |
+| Adapter | Flag | Input Format / Compatibility |
+| :--- | :--- | :--- |
+| **Auto-Detect** | `--adapter auto` | Automatically detects JSON structure |
 | **Generic** | `--adapter generic` | `{ "version": 1, "events": [...] }` |
-| **LangGraph / LangChain** | `--adapter langgraph` | `{ "messages": [{ "type": "human\|ai\|tool", ... }] }` |
-| **OpenAI Agents / Chat** | `--adapter openai` | `{ "messages": [{ "role", "tool_calls" }] }` or Responses `output` |
-| **Vercel AI SDK** | `--adapter vercel-ai` | `{ "messages": [{ "parts": [...] }] }` or `{ "steps": [...] }` |
-
-Try the samples:
-
-```powershell
-pnpm --filter @kashifmuhammad/agent-inspector start -- --log examples/openai-agents-run.json --port 8811
-pnpm --filter @kashifmuhammad/agent-inspector start -- --log examples/vercel-ai-run.json --port 8812
-pnpm --filter @kashifmuhammad/agent-inspector start -- --log examples/langgraph-messages.json --port 8813
-```
-
-### Also supported
-
-| Area | Support |
-|------|---------|
-| **Custom Node / Python agents** | Yes - write generic events or POST `/api/ingest` |
-| **Ollama tool-calling agents** | Yes - see `examples/real-agent` |
-| **Live Approve / Deny** | Yes - `--live` + ingest API |
-| **React embed** | Yes - `@kashifmuhammad/agent-inspector-react` |
-| **Offline localhost** | Yes - no account / cloud |
-
-### Works with a thin export (no dedicated adapter yet)
-
-| Stack | How |
-|-------|-----|
-| CrewAI, AutoGen, LlamaIndex, Semantic Kernel | Export to **generic** events or OpenAI-style messages |
-| Any HTTP/CLI agent | Log file **or** `/api/ingest` |
-
-### Not supported in v1
-
-| Not included | Why |
-|--------------|-----|
-| Hosted / cloud SaaS | Local-only by design |
-| Auth, users, teams | No accounts |
-| Database / long-term storage | File-based replay |
-| Analytics, cost tracking | Out of scope |
-| Multi-agent graph visualization | Single-run timeline only |
-| Mobile apps | Web / React only |
-
-**Rule of thumb:** dump JSON your adapter understands, or emit the **generic** event schema - one UI for every stack.
+| **LangGraph / LangChain** | `--adapter langgraph` | `{ "messages": [{ "type": "human\|ai\|tool" }] }` |
+| **OpenAI Agents / Chat** | `--adapter openai` | OpenAI Chat Completions & Assistants API |
+| **Vercel AI SDK** | `--adapter vercel-ai` | `{ "messages": [...] }` or `{ "steps": [...] }` |
 
 ---
 
-## CLI flags
-
-| Flag | What it does |
-|------|----------------|
-| `--log <file>` | Replay a run from JSON |
-| `--adapter <name>` | `auto` (default) · `generic` · `langgraph` · `openai` · `vercel-ai` |
-| `--live` | Accept live events + approval gate |
-| `--port 8811` | Local port (change if busy) |
-| `--no-open` | Don't auto-open the browser |
-
-If a port is busy (`EADDRINUSE`), pick another, e.g. `--port 8812`.
-
----
-
-## Use with your own agent
-
-### After a run (replay)
-
-```powershell
-pnpm --filter @kashifmuhammad/agent-inspector start -- --log .\my-run.json --adapter auto --port 8811
-```
-
-Or force a stack: `--adapter openai` / `--adapter vercel-ai` / `--adapter langgraph` / `--adapter generic`.
-
-### During a run (live gate)
-
-Start with `--live`, then from your tool wrapper:
-
-```js
-const res = await fetch("http://127.0.0.1:8811/api/ingest", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    event: "on_tool_start",
-    data: { name: "send_email", id: "tc_1", input: { to: "a@b.co" } },
-  }),
-});
-const { decision, paused } = await res.json();
-if (paused && decision === "deny") throw new Error("Denied by operator");
-```
-
-Copy the helper used by the example: [`examples/real-agent/inspector-client.mjs`](examples/real-agent/inspector-client.mjs)
-
----
-
-## Optional: Ollama LLM agent
-
-Same tools, but the model chooses the steps:
-
-```powershell
-# needs: ollama serve + a model (e.g. llama3.2:1b)
-$env:OLLAMA_MODEL="llama3.2:1b"
-node examples/real-agent/run.mjs
-```
-
-Tiny models can skip steps. Prefer `--scripted` when you want a reliable demo.
-
-Older invoice-only demo: `examples/ollama-agent/run.mjs`
-
----
-
-## Embed in your React app
+## 💻 Embed in React App
 
 ```bash
 pnpm add @kashifmuhammad/agent-inspector-react @kashifmuhammad/agent-inspector-core
@@ -202,65 +140,44 @@ pnpm add @kashifmuhammad/agent-inspector-react @kashifmuhammad/agent-inspector-c
 import { AgentInspector } from "@kashifmuhammad/agent-inspector-react";
 import "@kashifmuhammad/agent-inspector-react/styles.css";
 
-<AgentInspector log={runLog} mode="replay" />
+export function Dashboard({ runLog }) {
+  return <AgentInspector log={runLog} mode="replay" />;
+}
 ```
 
 ---
 
-## Repo layout
+## 📁 Repository Layout
 
 ```
-packages/core     event schema + LangGraph adapter
-packages/react    <AgentInspector /> UI
-packages/cli      local dashboard (agent-inspector)
-examples/real-agent   <- start here (support-desk agent)
-examples/runs         saved trajectories
+packages/core         Event schemas & LangGraph adapters
+packages/react        <AgentInspector /> UI Component
+packages/cli          Local dashboard CLI (agent-inspector)
+examples/real-agent   Support-desk agent reference implementation
+examples/runs         Sample execution trajectory files
 ```
 
-**Assumptions:** pnpm workspaces, package scope `@agent-inspector/*`, Node 18+.
+---
+
+## 🗺️ Roadmap
+
+- [x] v1.0 Initial release with LangGraph, OpenAI, Vercel AI SDK adapters
+- [x] Live human approval gating API
+- [ ] v1.1 Rule preset engine & expanded Python agent adapters
+- [ ] v1.2 Run comparison view & approval metadata logs
 
 ---
 
-## Community and contribution
+## 🤝 Contributing
 
-- Contribution guide: [`CONTRIBUTING.md`](CONTRIBUTING.md)
-- Code of Conduct: [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md)
-- Issue templates: [`.github/ISSUE_TEMPLATE`](.github/ISSUE_TEMPLATE)
-- PR template: [`.github/PULL_REQUEST_TEMPLATE.md`](.github/PULL_REQUEST_TEMPLATE.md)
-
-If you want to help, a great first issue is:
-
-- adapter improvements (`auto` detection, new framework mappings)
-- tests for replay/live flows
-- docs and starter integrations for real agents
-- timeline UX polish
+Contributions are welcome! Check out [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md).
 
 ---
 
-## Public roadmap (non-MVP direction)
+## 📄 License
 
-### v1.1 (stability + adoption)
+Distributed under the MIT License. See `LICENSE` for details.
 
-- expand adapter coverage (OpenAI/Vercel improvements, new stack exports)
-- increase test coverage (adapter fixtures + live gate e2e)
-- improve CLI config (`--adapter auto` behavior, better error messages)
-- add more real integration examples (Python + JS)
-
-### v1.2 (team workflows)
-
-- richer approval policies (rule presets, per-tool/per-risk policies)
-- approval metadata (who approved, reason/comment, timestamp UI polish)
-- improved replay filtering/search and run comparisons
-
-### v2.0 (team-ready platform surface)
-
-- optional shared self-hosted service mode (still keep local-first mode)
-- RBAC-style approval roles
-- stronger audit exports and compliance-friendly reporting
-
----
-
-## License
-
-MIT
-
+<div align="center">
+  Created with ❤️ by <a href="https://github.com/kashifdevfe"><strong>Kashif Muhammad</strong></a>
+</div>
